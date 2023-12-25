@@ -1,10 +1,13 @@
 package by.itclass.model.db;
 
+import lombok.experimental.UtilityClass;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@UtilityClass
 public class ConnectionManager {
     public static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
     public static final String URL = "jdbc:mysql://localhost:3306/2301_final";

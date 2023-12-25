@@ -30,3 +30,51 @@ input[type=submit] {
 .error {
     color: red;
 }
+
+.nav-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: gray;
+    overflow: hidden;
+}
+
+.nav-li {
+    float: right;
+}
+
+.nav-li.float-left {
+    float: left;
+}
+
+.nav-li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.active {
+    background-color: green;
+}
+
+.nav-li a:hover:not(.active) {
+    background-color: dimgray;
+}
+
+.default-image {
+    width: 100%;
+    opacity: 0.5;
+}
+
+.greeting {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+}
+
+body {
+    margin: 0;
+}
