@@ -10,7 +10,10 @@
 <body>
     <jsp:include page="<%=JspConstants.MENU_JSP%>"/>
     <h2>Hello ${user.name}</h2>
-    <h1>Some content will be placed here!!!</h1>
+    <c:if test="${not empty message}">
+        <h2>${message}</h2>
+    </c:if>
+    <jsp:include page="/jsp/slider.html"/>
     <c:if test="${not empty pizzas}">
         <h2>Today we propose next pizzas:</h2>
         <c:forEach var="pizza" items="${pizzas}">
@@ -49,5 +52,6 @@
             </div>
         </c:forEach>
     </c:if>
+    <script src="/js/slider.js"></script>
 </body>
 </html>
