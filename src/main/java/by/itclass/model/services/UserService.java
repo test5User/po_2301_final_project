@@ -5,11 +5,11 @@ import by.itclass.model.entities.User;
 
 import java.util.Objects;
 
-public class UserService {
+public class UserService implements Service {
     private static UserService service;
     public UserDao dao;
 
-    private UserService() {
+    public UserService() {
         dao = UserDao.getInstance();
     }
 

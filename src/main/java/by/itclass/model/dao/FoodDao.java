@@ -13,10 +13,6 @@ import static by.itclass.constants.DbConstants.*;
 public class FoodDao {
     private static FoodDao dao;
 
-    private FoodDao() {
-        ConnectionManager.init();
-    }
-
     public static FoodDao getInstance() {
         if (Objects.isNull(dao)) {
             dao = new FoodDao();

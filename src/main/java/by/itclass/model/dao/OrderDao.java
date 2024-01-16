@@ -1,11 +1,10 @@
 package by.itclass.model.dao;
 
 import by.itclass.model.db.ConnectionManager;
-import by.itclass.model.entities.Order;
-import by.itclass.model.entities.OrderItem;
-import by.itclass.model.entities.User;
+import by.itclass.model.entities.*;
 import jakarta.servlet.http.HttpSession;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -19,10 +18,6 @@ import static by.itclass.constants.JspConstants.*;
 
 public class OrderDao {
     private static OrderDao dao;
-
-    private OrderDao() {
-        ConnectionManager.init();
-    }
 
     public static OrderDao getInstance() {
         if (Objects.isNull(dao)) {
@@ -91,5 +86,46 @@ public class OrderDao {
             e.printStackTrace();
         }
         return orders;
+    }
+
+    public Receipt buildReceipt(String orderId) {
+        var receipt = new Receipt();
+        try (var cn = ConnectionManager.getConnection();
+            var ps = cn.prepareStatement(SELECT_HEAD_FOR_ORDER);
+            var ps1 = cn.prepareStatement(SELECT_ITEMS_FOR_ORDER)){
+            ps.setString(1, orderId);
+            var rs = ps.executeQuery();
+            if (rs.next()) {
+                var date = rs.getString(DATE_COL);
+                var address = rs.getString(ADDRESS_COL);
+                receipt.setOrder(new Order(orderId, date, address));
+                var receiptItems = getItemsForReceipt(orderId, ps1);
+                receipt.setReceiptItems(receiptItems);
+                receipt.setTotal(Math.round(getTotalAmount(receiptItems)*100)/100d);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return receipt;
+    }
+
+    private List<ReceiptItem> getItemsForReceipt(String orderId, PreparedStatement ps) throws SQLException {
+        var items = new ArrayList<ReceiptItem>();
+        ps.setString(1, orderId);
+        var rs = ps.executeQuery();
+        while (rs.next()) {
+            var foodName = rs.getString(NAME_COL);
+            var foodPrice = rs.getDouble(PRICE_COL);
+            var quantity = rs.getInt(QUANTITY_COL);
+            var amount = foodPrice * quantity;
+            items.add(new ReceiptItem(foodName, foodPrice, quantity, amount));
+        }
+        return items;
+    }
+
+    private double getTotalAmount(List<ReceiptItem> items) {
+        return items.stream()
+                .map(ReceiptItem::getItemAmount)
+                .reduce(0d, Double::sum);
     }
 }

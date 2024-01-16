@@ -18,7 +18,7 @@
         <div class="order-list-container">
           <h3>${order.date} you order delivery to address ${order.address}.
           Id of order is ${order.id}</h3>
-          <form method="post" action="qqq">
+          <form method="post" action="<%=ApplicationConstants.PRINT_ORDER_CONTROLLER%>">
             <input type="hidden" name="orderId" value="${order.id}">
             <input type="submit" value="Print Receipt">
           </form>

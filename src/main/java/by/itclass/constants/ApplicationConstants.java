@@ -10,6 +10,7 @@ public class ApplicationConstants {
     public static final String CART_CONTROLLER = "/cart";
     public static final String ORDER_CONTROLLER = "/order";
     public static final String ORDER_HISTORY_CONTROLLER = "/orderHistory";
+    public static final String PRINT_ORDER_CONTROLLER = "/printOrder";
 
     public static final String USER_NOT_FOUND = "User not found";
     public static final String USER_NOT_REGISTERED = "User not registered";
