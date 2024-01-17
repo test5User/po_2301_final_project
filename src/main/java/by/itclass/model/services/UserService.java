@@ -6,18 +6,10 @@ import by.itclass.model.entities.User;
 import java.util.Objects;
 
 public class UserService implements Service {
-    private static UserService service;
     public UserDao dao;
 
     public UserService() {
-        dao = UserDao.getInstance();
-    }
-
-    public static UserService getInstance() {
-        if (Objects.isNull(service)) {
-            service = new UserService();
-        }
-        return service;
+        dao = new UserDao();
     }
 
     public User getUser(String login, String password) {

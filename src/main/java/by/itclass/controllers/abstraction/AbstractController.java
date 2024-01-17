@@ -1,4 +1,4 @@
-package by.itclass.controllers;
+package by.itclass.controllers.abstraction;
 
 import by.itclass.model.services.CartService;
 import by.itclass.model.services.FoodService;
@@ -14,19 +14,6 @@ import java.io.IOException;
 import static by.itclass.constants.JspConstants.MESSAGE_ATTR;
 
 public abstract class AbstractController extends HttpServlet {
-    protected UserService userService;
-    protected FoodService foodService;
-    protected CartService cartService;
-    protected OrderService orderService;
-
-    @Override
-    public void init() throws ServletException {
-        userService = UserService.getInstance();
-        foodService = FoodService.getInstance();
-        cartService = CartService.getInstance();
-        orderService = OrderService.getInstance();
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);

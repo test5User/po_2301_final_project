@@ -15,6 +15,9 @@
     </c:if>
     <jsp:include page="/jsp/slider.html"/>
     <c:if test="${not empty pizzas}">
+        <script>
+            document.getElementsByClassName("slideshow-container")[0].style.display = 'none';
+        </script>
         <h2>Today we propose next pizzas:</h2>
         <c:forEach var="pizza" items="${pizzas}">
             <div class="food-item-box">
@@ -34,6 +37,9 @@
         </c:forEach>
     </c:if>
     <c:if test="${not empty drinks}">
+        <script>
+            document.getElementsByClassName("slideshow-container")[0].style.display = 'none';
+        </script>
         <h2>Today we propose next drinks:</h2>
         <c:forEach var="drink" items="${drinks}">
             <div class="food-item-box">

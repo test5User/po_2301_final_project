@@ -10,14 +10,6 @@ import java.util.Objects;
 import static by.itclass.constants.DbConstants.*;
 
 public class UserDao {
-    private static UserDao dao;
-
-    public static UserDao getInstance() {
-        if (Objects.isNull(dao)) {
-            dao = new UserDao();
-        }
-        return dao;
-    }
 
     public User getUser(String login, String password) {
         try (var cn = ConnectionManager.getConnection();

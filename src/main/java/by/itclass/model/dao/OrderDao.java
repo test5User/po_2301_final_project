@@ -17,14 +17,6 @@ import static by.itclass.constants.DbConstants.*;
 import static by.itclass.constants.JspConstants.*;
 
 public class OrderDao {
-    private static OrderDao dao;
-
-    public static OrderDao getInstance() {
-        if (Objects.isNull(dao)) {
-            dao = new OrderDao();
-        }
-        return dao;
-    }
 
     public boolean saveOrder(HttpSession session, String address) {
         var user = (User) session.getAttribute(USER_ATTR);

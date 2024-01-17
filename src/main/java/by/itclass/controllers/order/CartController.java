@@ -1,8 +1,11 @@
 package by.itclass.controllers.order;
 
-import by.itclass.controllers.AbstractController;
+import by.itclass.controllers.abstraction.AbstractController;
 import by.itclass.model.entities.FoodItem;
 import by.itclass.model.entities.OrderItem;
+import by.itclass.model.services.CartService;
+import by.itclass.model.services.ServiceFactory;
+import by.itclass.model.services.ServiceType;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +18,13 @@ import static by.itclass.constants.JspConstants.*;
 
 @WebServlet(value = CART_CONTROLLER)
 public class CartController extends AbstractController {
+    private CartService cartService;
+
+    @Override
+    public void init() throws ServletException {
+        cartService = (CartService) ServiceFactory.getService(ServiceType.CART_SERVICE);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var id = Integer.parseInt(req.getParameter(FOOD_ID_PARAM));
